@@ -1,4 +1,6 @@
 package org.launchcode.techjobs_oo;
+import java.lang.reflect.Array;
+
 import java.util.Objects;
 
 public class Job {
@@ -32,12 +34,37 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return getId() == job.getId();
-    }
+        return getId() == job.getId() &&
+                getName().equals(job.getName()) &&
+                getEmployer().equals(job.getEmployer()) &&
+                getLocation().equals(job.getLocation()) &&
+                getPositionType().equals(job.getPositionType()) &&
+                getCoreCompetency().equals(job.getCoreCompetency());    }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+    @Override
+    public String toString() {
+        String[] jobPropertyArr = {String.valueOf(this.id), this.name, this.employer.getValue(), this.location.getValue(), this.positionType.getValue(), this.coreCompetency.getValue()};
+        String[] jobArr = new String[6];
+        for(int i = 0; i < jobPropertyArr.length; i++) {
+            if(jobPropertyArr[i] == "") {
+                jobArr[i] = "Data Not Available";
+            }else {
+                jobArr[i] = jobPropertyArr[i];
+            }
+        }
+        String jobString = "\n" +
+                "ID: " + Array.get(jobArr, 0) + "\n" +
+                "Name: " + Array.get(jobArr, 1) + "\n" +
+                "Employer: " + Array.get(jobArr, 2) + "\n" +
+                "Location: " + Array.get(jobArr, 3) + "\n" +
+                "Position Type: " + Array.get(jobArr, 4) + "\n" +
+                "Core Competency: " + Array.get(jobArr, 5) +
+                "\n";
+        return jobString;
     }
 
     public String getName() {
